@@ -23,7 +23,7 @@
     "deploy:firestore": "firebase deploy --only firestore",
     "deploy:storage": "firebase deploy --only storage",
     "deploy:functions": "firebase deploy --only functions",
-    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:hosting": "npm run build && firebase deploy --only hosting",
     "deploy": "firebase deploy"
   },
   "eslintConfig": {
