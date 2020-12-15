@@ -19,6 +19,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
+          CI: false
           REACT_APP_BASE_URL: "https://kichirmichir-dev.web.app"
           REACT_APP_FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
       - name: Archive Production Artifact
