@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+  	function isSignedIn() {
+      return request.auth != null;
+    }
+    function belongsTo(userId) {
+        return isSignedIn() && request.auth.uid == userId;
+    }
+    
+    function isValidUserDataToCreate() {
+    	let incomingData = request.resource.data;
+      // displayName, photoURL, userName, bio
+      return "displayName" in incomingData && "userName" in incomingData;
+    }
+    
+    function userNameIsSame() {
+    	let incomingUserName = request.resource.data.userName;
+      return incomingUserName != null ? incomingUserName == resource.data.userName : true;
+    }
+        
+    match /users/{userId} {
+    	allow read: if isSignedIn();
+    	allow create: if isSignedIn() && isValidUserDataToCreate();
+      allow update: if belongsTo(userId) && userNameIsSame();
+      allow delete: if belongsTo(userId);
+    }
+    
+    function isValidPostDataToCreate() {
+    	let incomingData = request.resource.data;
+      return "author" in incomingData && "content" in incomingData && "createdAt" in incomingData;
+    }
+    
+    match /posts/{postId} {
+    	allow read: if isSignedIn();
+    	allow create: if isSignedIn() && isValidPostDataToCreate();
+      allow update: if false; /* Post cannot be updated */
+      allow delete: if belongsTo(resource.data.author.uid);
+      
+      match /likes/{likedUserId} {
+      	allow read, create: if isSignedIn();
+        allow update: if false;
+        allow delete: if belongsTo(likedUserId)
+      }
+      
+      match /comments/{commentId} {
+      	allow read: if isSignedIn();
+      	allow create: if isSignedIn() && isValidPostDataToCreate();
+        allow update: if false; /* Comment cannot be updated */
+        allow delete: if belongsTo(resource.data.author.uid);
+      }
+      
+    }
+    
+  }
+}

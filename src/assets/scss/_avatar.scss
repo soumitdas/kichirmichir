@@ -1,0 +1,54 @@
+@mixin avatar($size) {
+  width: $size;
+  height: $size;
+  background-color: #32a8a2;
+  text-align: center;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+
+  .initials {
+    position: relative;
+    top: $size / 4;
+    font-size: $size / 2;
+    line-height: $size / 2;
+    color: #fff;
+    font-family: monospace;
+    font-weight: bold;
+  }
+}
+.avatar-circle {
+  @include avatar(100px);
+}
+.avatar-circle-small {
+  @include avatar(48px);
+}
+.avatar-circle-medium {
+  @include avatar(64px);
+}
+.avatar-circle-large {
+  @include avatar(250px);
+}
+.avatar-circle-nav {
+  $size: 1.75rem;
+  @include avatar($size);
+  margin-right: $default-padding * 0.5;
+  .initials {
+    top: 0.1rem;
+  }
+}
+
+$avatar-profile-size: 128px;
+
+.avatar-circle-profile {
+  @include avatar($avatar-profile-size);
+}
+
+.is-avatar-profile {
+  position: absolute;
+  bottom: -($avatar-profile-size / 2);
+  //margin-left: -($avatar-profile-size / 2);
+  //left: 50%;
+  border: 3px solid #fff;
+  border-radius: 50%;
+}

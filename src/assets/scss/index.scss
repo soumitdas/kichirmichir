@@ -1,0 +1,36 @@
+@charset "utf-8";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+
+$primary: #6200ee;
+
+/* Default font */
+$family-sans-serif: "Poppins", sans-serif;
+
+/* Base: Size  */
+$size-base: 1rem;
+$default-padding: $size-base * 1.5;
+
+$navbar-avatar-size: 1.75rem;
+
+//$tabs-border-bottom-style: hidden;
+
+@import "~bulma/sass/utilities/_all";
+@import "~bulma/sass/base/_all";
+@import "~bulma/sass/elements/_all";
+@import "~bulma/sass/form/_all";
+@import "~bulma/sass/grid/_all";
+@import "~bulma/sass/components/_all";
+@import "~bulma/sass/helpers/_all";
+@import "~bulma/sass/layout/_all";
+
+.wrapper {
+  min-height: calc(100vh - 3.4rem);
+}
+
+.is-mx-auto {
+  margin: 0 auto;
+}
+
+@import "./avatar";
+@import "./card";
+@import "./navbar";

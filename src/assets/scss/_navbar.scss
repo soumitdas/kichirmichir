@@ -1,0 +1,26 @@
+nav.navbar .navbar-item {
+  &.has-user-avatar {
+    .is-user-avatar {
+      margin-right: $default-padding * 0.5;
+      display: inline-flex;
+      width: $navbar-avatar-size;
+      height: $navbar-avatar-size;
+      img {
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+@include touch {
+  nav.navbar .navbar-menu .navbar-item {
+    &.has-user-avatar {
+      > .navbar-link {
+        display: flex;
+        align-items: center;
+        padding-top: $default-padding * 0.5;
+        padding-bottom: $default-padding * 0.5;
+      }
+    }
+  }
+}
